@@ -60,7 +60,7 @@
 <body>
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="subtitle">Flippy - Page Flip PDF Reader &middot; Effective May 12, 2026</p>
+    <p class="subtitle">Flippy - Page Flip PDF Reader &middot; Effective June 8, 2026</p>
 
     <h2>Overview</h2>
     <p>Flippy is a PDF reader available on Android and iOS. Your privacy matters to us. This policy explains what data Flippy accesses, how it is used, and your choices.</p>
@@ -73,6 +73,7 @@
       <li><strong>Reading progress</strong> (current page, reading history)</li>
       <li><strong>App preferences</strong> (theme, reading settings, tags)</li>
       <li><strong>Drawings</strong> made with the draw tool</li>
+      <li><strong>Downloaded read-aloud audio</strong> &mdash; if you choose to download a chapter for offline listening, the generated audio is saved in the app's private storage on your device and can be deleted at any time</li>
     </ul>
     <p>This data is stored in your device's local storage and is not accessible to us or any third party.</p>
 
@@ -101,6 +102,13 @@
       <li>Anthropic's use of this data is governed by <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">Anthropic's Commercial Terms</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
 
+    <h2>AI Explain (Premium Feature)</h2>
+    <p>When you highlight a word or phrase in a PDF and tap "Explain," Flippy generates a short, even-handed explanation of that term.</p>
+    <ul>
+      <li>The <strong>highlighted text and surrounding page content</strong> are sent to Anthropic's Claude API (via our backend) to generate the explanation, the same way AI Q&amp;A works. This data is not stored by Flippy and is not used to train Anthropic's models.</li>
+      <li>To show relevant pictures, the <strong>highlighted term</strong> is sent to <strong>Wikipedia / Wikimedia</strong> to look up public images. This is a standard public search request; no account, login, or personal data is involved.</li>
+    </ul>
+
     <h2>In-App Purchases</h2>
     <p>Flippy offers optional premium subscriptions. All purchases are processed by Apple (App Store) or Google (Google Play). We do not collect or store any payment information. Purchase management and billing are handled entirely by the respective platform.</p>
 
@@ -109,7 +117,7 @@
     <p>Flippy uses a small backend service we operate (a Cloudflare Worker) to route AI Q&amp;A and Read-Aloud requests to their respective providers (Anthropic and OpenAI). This proxy lets us keep our API keys server-side so they aren't extractable from the app. The backend receives:</p>
     <ul>
       <li>An <strong>anonymous install token</strong> &mdash; a random ID generated on first launch and stored only on your device. Used to apply rate limits per install so a single device can't run up unexpected charges. Not linked to your name, email, or any account.</li>
-      <li>The <strong>text of your AI question and the PDF content you're asking about</strong> (only for AI Q&amp;A / summary requests; only for as long as it takes to forward the request).</li>
+      <li>The <strong>text of your AI question (or highlighted term) and the PDF content you're asking about</strong> (only for AI Q&amp;A, summary, and Explain requests; only for as long as it takes to forward the request).</li>
       <li>The <strong>page text you've asked Flippy to read aloud</strong> (only for Read-Aloud requests).</li>
       <li>Your IP address, as is standard with any HTTPS request. Cloudflare may retain this in standard request logs (typically days, not months).</li>
     </ul>
@@ -124,6 +132,7 @@
       <li><strong>OpenAI Text-to-Speech API</strong> &mdash; for AI Read-Aloud (routed via our backend; see Analytics section above)</li>
       <li><strong>Anthropic Claude API</strong> &mdash; for AI Q&amp;A and summaries (routed via our backend; see Analytics section above)</li>
       <li><strong>dictionaryapi.dev</strong> &mdash; for in-app word definitions (only the selected word is sent; no account or API key required)</li>
+      <li><strong>Wikipedia / Wikimedia</strong> &mdash; for the images shown in AI Explain (only the highlighted term is sent; no account or API key required)</li>
       <li><strong>Cloudflare Workers</strong> &mdash; our own backend proxy that holds OpenAI/Anthropic credentials and applies rate limiting</li>
     </ul>
     <p>Each service is subject to its own privacy policy. No data is shared with these services unless you actively use the corresponding feature.</p>
