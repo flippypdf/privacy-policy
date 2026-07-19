@@ -108,9 +108,10 @@
     <p>Flippy lets you ask questions about your PDF out loud. This feature uses your device's microphone.</p>
     <ul>
       <li>The microphone is only active <strong>while you are recording a question</strong> (after you press the microphone button). Flippy never listens in the background.</li>
-      <li><strong>Your voice recording never leaves your device.</strong> Your speech is turned into text on the device itself, using the speech recognition built into Android or iOS. Only that text is used; the recording is deleted straight afterwards and is never uploaded to us or to anyone else.</li>
-      <li>Because of this, voice questions only work on devices that provide on-device speech recognition. If yours does not, Flippy will tell you so and you can type your question instead &mdash; we would rather the feature be unavailable than send your voice to a server.</li>
+      <li><strong>Flippy tries to transcribe your speech on your own device first</strong>, using the speech recognition built into Android or iOS. When that succeeds, <strong>your recording never leaves your device</strong> &mdash; only the resulting text is used, and the recording is deleted straight afterwards. On most modern Android devices this is what happens.</li>
+      <li>If on-device transcription is unavailable or produces no result, your <strong>voice recording</strong> is sent via our backend to <strong>OpenAI's transcription API (Whisper)</strong> instead. <strong>On iPhone and iPad this is currently the usual path</strong>, because Apple's on-device transcription does not reliably return a result for recordings made this way. The recording is used only to produce the transcript and is not stored by Flippy or our backend beyond the lifetime of that request.</li>
       <li>The transcribed question is then handled exactly like a typed AI question (see AI Q&amp;A above), and the spoken answer is generated with OpenAI's Text-to-Speech.</li>
+      <li>OpenAI's handling of this audio is governed by <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API Data Usage Policies</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
 
     <h2>AI Explain (Premium Feature)</h2>
@@ -130,6 +131,7 @@
       <li>An <strong>anonymous install token</strong> &mdash; a random ID created the first time the app contacts our backend. It is stored on your device, and our backend keeps a record of it alongside the date it was created, your platform, the app version, and the IP address it was created from. It is used to apply rate limits per install so a single device can't run up unexpected charges, and to count unique installs in the anonymous event counters described below. It is not linked to your name, email, or any account, and reinstalling the app creates a brand-new token.</li>
       <li>The <strong>text of your AI question (or highlighted term) and the PDF content you're asking about</strong> (only for AI Q&amp;A, summary, Explain, and study-tool requests; only for as long as it takes to forward the request).</li>
       <li>The <strong>page text you've asked Flippy to read aloud</strong> (only for Read-Aloud requests).</li>
+      <li>Your <strong>voice recording</strong> when you ask a question with Speak-to-PDF and it could not be transcribed on your device (only to forward it for transcription; see the Speak-to-PDF section above).</li>
       <li>Your <strong>App Store or Google Play purchase receipt</strong> when the app verifies a premium subscription. The receipt contains no name, email, or payment details; the verification result is cached for up to 24 hours.</li>
       <li>Your IP address, as is standard with any HTTPS request. It is recorded once alongside your install token when that token is first created, and it appears in our backend's short-term request logs. Cloudflare may also retain it in standard request logs (typically days, not months).</li>
     </ul>
@@ -142,7 +144,7 @@
     <ul>
       <li><strong>Google Sign-In</strong> &mdash; for Cloud Sync authentication</li>
       <li><strong>Google Firebase / Firestore</strong> &mdash; for cloud data storage</li>
-      <li><strong>OpenAI Text-to-Speech API</strong> &mdash; for AI Read-Aloud, and for speaking AI answers out loud (routed via our backend; see Analytics section above). Voice questions you ask are transcribed on your own device and are not sent to OpenAI.</li>
+      <li><strong>OpenAI Text-to-Speech and Whisper transcription APIs</strong> &mdash; for AI Read-Aloud, for speaking AI answers out loud, and for transcribing Speak-to-PDF voice questions that your device could not transcribe locally (routed via our backend; see Analytics section above)</li>
       <li><strong>Anthropic Claude API</strong> &mdash; for AI Q&amp;A, summaries, AI Explain, and study tools (routed via our backend; see Analytics section above)</li>
       <li><strong>dictionaryapi.dev</strong> &mdash; for in-app word definitions (only the selected word is sent; no account or API key required)</li>
       <li><strong>Wikipedia / Wikimedia</strong> &mdash; for the images and captions shown in AI Explain (only the highlighted term or a related search phrase is sent; no account or API key required)</li>
