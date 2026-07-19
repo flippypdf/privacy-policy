@@ -60,19 +60,20 @@
 <body>
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="subtitle">Flippy - Page Flip PDF Reader &middot; Effective July 12, 2026</p>
+    <p class="subtitle">Flippy - Page Flip PDF Reader &middot; Effective July 18, 2026</p>
 
     <h2>Overview</h2>
     <p>Flippy is a PDF reader available on Android and iOS. Your privacy matters to us. This policy explains what data Flippy accesses, how it is used, and your choices.</p>
 
     <h2>Data Stored on Your Device</h2>
-    <p>Flippy stores all core data locally on your device. This data never leaves your device unless you explicitly enable Cloud Sync (a premium feature).</p>
+    <p>Flippy stores your library and everything you create locally on your device. This data never leaves your device unless you explicitly enable Cloud Sync (a premium feature). The AI features described further down are the exception: when you use one, the specific text you asked about is sent away to be processed, as explained in those sections.</p>
     <ul>
       <li><strong>PDF files</strong> you import into the app</li>
       <li><strong>Bookmarks, highlights, and annotations</strong> you create</li>
       <li><strong>Reading progress</strong> (current page, reading history)</li>
       <li><strong>App preferences</strong> (theme, reading settings, tags)</li>
       <li><strong>Drawings</strong> made with the draw tool</li>
+      <li><strong>Your AI conversations</strong> &mdash; the questions you ask and the answers you get back are saved on your device so you can come back to them later, kept separately for each PDF. They are <strong>never uploaded</strong>, and they are deliberately not included in Cloud Sync. You can erase a PDF's conversation at any time with the "Clear chat" button in the AI panel.</li>
       <li><strong>Downloaded read-aloud audio</strong> &mdash; if you choose to download a chapter for offline listening, the generated audio is saved in the app's private storage on your device and can be deleted at any time</li>
     </ul>
     <p>This data is stored in your device's local storage and is not accessible to us or any third party.</p>
@@ -89,7 +90,7 @@
     <h2>AI Read-Aloud (Premium Feature)</h2>
     <p>Flippy offers text-to-speech powered by OpenAI's Text-to-Speech API.</p>
     <ul>
-      <li>When you use this feature, the <strong>text content of the current page</strong> is sent to OpenAI's servers to generate audio.</li>
+      <li>When you use this feature, the <strong>text of the page being read</strong> is sent to OpenAI's servers to generate audio. So that playback does not pause between pages, the text of the next page or two may be sent slightly ahead of when you reach it. If you ask Flippy to read an AI answer out loud, that answer text is sent as well.</li>
       <li>No PDF files are uploaded. Only extracted text is transmitted.</li>
       <li>OpenAI processes the text and returns audio. OpenAI's use of this data is governed by <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API Data Usage Policies</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
@@ -98,6 +99,7 @@
     <p>Flippy uses Anthropic's Claude API to answer questions about your PDFs, generate summaries, and create study materials (flashcards and quizzes) from chapters you choose.</p>
     <ul>
       <li>When you use these features, the <strong>text content of your PDF</strong> (the most relevant pages for your question, or the chapter you selected) is sent to Anthropic's Claude API along with your question.</li>
+      <li>To work out which pages are the most relevant, Flippy may first send your document's <strong>table of contents together with a short one-line extract from each page</strong>. This step covers more of your document than the answer step, but it is used only to pick the right pages to read closely.</li>
       <li>This data is processed to generate a response and is not stored by Flippy.</li>
       <li>Anthropic's use of this data is governed by <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">Anthropic's Commercial Terms</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
@@ -106,9 +108,9 @@
     <p>Flippy lets you ask questions about your PDF out loud. This feature uses your device's microphone.</p>
     <ul>
       <li>The microphone is only active <strong>while you are recording a question</strong> (after you press the microphone button). Flippy never listens in the background.</li>
-      <li>Your <strong>voice recording</strong> is sent via our backend to <strong>OpenAI's transcription API (Whisper)</strong> to convert it to text. The recording is processed to produce a transcript and is not stored by Flippy or our backend beyond the lifetime of the request.</li>
+      <li><strong>Your voice recording never leaves your device.</strong> Your speech is turned into text on the device itself, using the speech recognition built into Android or iOS. Only that text is used; the recording is deleted straight afterwards and is never uploaded to us or to anyone else.</li>
+      <li>Because of this, voice questions only work on devices that provide on-device speech recognition. If yours does not, Flippy will tell you so and you can type your question instead &mdash; we would rather the feature be unavailable than send your voice to a server.</li>
       <li>The transcribed question is then handled exactly like a typed AI question (see AI Q&amp;A above), and the spoken answer is generated with OpenAI's Text-to-Speech.</li>
-      <li>OpenAI's handling of this audio is governed by <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API Data Usage Policies</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
 
     <h2>AI Explain (Premium Feature)</h2>
@@ -125,29 +127,29 @@
     <p><strong>There are no ads inside Flippy.</strong> We do not display ads, sell your data, or include any third-party advertising or analytics SDKs (no Meta/Facebook SDK, no Google Analytics, no crash reporting SDKs).</p>
     <p>Flippy uses a small backend service we operate (a Cloudflare Worker) to route AI Q&amp;A and Read-Aloud requests to their respective providers (Anthropic and OpenAI). This proxy lets us keep our API keys server-side so they aren't extractable from the app. The backend receives:</p>
     <ul>
-      <li>An <strong>anonymous install token</strong> &mdash; a random ID generated on first launch and stored only on your device. Used to apply rate limits per install so a single device can't run up unexpected charges, and to count unique installs in the anonymous event counters described below. Not linked to your name, email, or any account.</li>
+      <li>An <strong>anonymous install token</strong> &mdash; a random ID created the first time the app contacts our backend. It is stored on your device, and our backend keeps a record of it alongside the date it was created, your platform, the app version, and the IP address it was created from. It is used to apply rate limits per install so a single device can't run up unexpected charges, and to count unique installs in the anonymous event counters described below. It is not linked to your name, email, or any account, and reinstalling the app creates a brand-new token.</li>
       <li>The <strong>text of your AI question (or highlighted term) and the PDF content you're asking about</strong> (only for AI Q&amp;A, summary, Explain, and study-tool requests; only for as long as it takes to forward the request).</li>
       <li>The <strong>page text you've asked Flippy to read aloud</strong> (only for Read-Aloud requests).</li>
-      <li>Your <strong>voice recording</strong> when you ask a question with Speak-to-PDF (only to forward it for transcription; see the Speak-to-PDF section above).</li>
       <li>Your <strong>App Store or Google Play purchase receipt</strong> when the app verifies a premium subscription. The receipt contains no name, email, or payment details; the verification result is cached for up to 24 hours.</li>
-      <li>Your IP address, as is standard with any HTTPS request. Cloudflare may retain this in standard request logs (typically days, not months).</li>
+      <li>Your IP address, as is standard with any HTTPS request. It is recorded once alongside your install token when that token is first created, and it appears in our backend's short-term request logs. Cloudflare may also retain it in standard request logs (typically days, not months).</li>
     </ul>
     <p>The backend does not store the contents of your questions or PDF pages beyond the lifetime of each request. It does not receive bookmarks, highlights, notes, reading history, or any data that identifies you.</p>
     <p>The backend also keeps small, anonymous daily counters of certain in-app events so we can understand how Flippy is used, improve the app, and detect abuse of free features. Examples: the app being opened (counted at most once per day per install, so we can see how many devices actively use Flippy), a PDF being imported, the upgrade screen being viewed, a purchase completing, or a monthly usage limit being reached. Only the <em>name</em> of the event is counted &mdash; never the content of your documents, questions, notes, or anything that identifies you &mdash; and the counters roll off after 90 days.</p>
     <p>Reading reminders (daily notifications) are generated and scheduled entirely on your device. The name of your last-read PDF and your monthly listening totals are stored locally to personalize them and never leave your device. You can turn reminders off anytime in Settings.</p>
 
     <h2>Third-Party Services</h2>
-    <p>Flippy integrates with the following third-party services only when you explicitly use the corresponding feature:</p>
+    <p>Flippy integrates with the following third-party services. Except where noted, each is contacted only when you explicitly use the corresponding feature:</p>
     <ul>
       <li><strong>Google Sign-In</strong> &mdash; for Cloud Sync authentication</li>
       <li><strong>Google Firebase / Firestore</strong> &mdash; for cloud data storage</li>
-      <li><strong>OpenAI Text-to-Speech and Whisper transcription APIs</strong> &mdash; for AI Read-Aloud and Speak-to-PDF voice questions (routed via our backend; see Analytics section above)</li>
+      <li><strong>OpenAI Text-to-Speech API</strong> &mdash; for AI Read-Aloud, and for speaking AI answers out loud (routed via our backend; see Analytics section above). Voice questions you ask are transcribed on your own device and are not sent to OpenAI.</li>
       <li><strong>Anthropic Claude API</strong> &mdash; for AI Q&amp;A, summaries, AI Explain, and study tools (routed via our backend; see Analytics section above)</li>
       <li><strong>dictionaryapi.dev</strong> &mdash; for in-app word definitions (only the selected word is sent; no account or API key required)</li>
       <li><strong>Wikipedia / Wikimedia</strong> &mdash; for the images and captions shown in AI Explain (only the highlighted term or a related search phrase is sent; no account or API key required)</li>
       <li><strong>Cloudflare Workers</strong> &mdash; our own backend proxy that holds OpenAI/Anthropic credentials and applies rate limiting</li>
+      <li><strong>cdnjs (a public Cloudflare CDN)</strong> &mdash; Flippy loads the open-source library it uses to draw PDF pages from this public CDN. This happens <strong>every time the app starts</strong>, not only when you use a particular feature. Only the ordinary information carried by any web request is involved, such as your IP address; none of your documents, questions, or reading data is sent.</li>
     </ul>
-    <p>Each service is subject to its own privacy policy. No data is shared with these services unless you actively use the corresponding feature.</p>
+    <p>Each service is subject to its own privacy policy. Apart from the CDN noted above, no data is shared with these services unless you actively use the corresponding feature.</p>
 
     <h2>Children's Privacy</h2>
     <p>Flippy is not directed at children under the age of 13. We do not knowingly collect personal information from children.</p>
@@ -156,7 +158,8 @@
     <p>You can delete all your data at any time:</p>
     <ul>
       <li><strong>Local data:</strong> Uninstall the app or clear app data from your device settings.</li>
-      <li><strong>Cloud data:</strong> Use the "Delete Cloud Data" option in Flippy's settings, or contact us to request deletion.</li>
+      <li><strong>AI conversations:</strong> Use "Clear chat" in the AI panel to erase the conversation for a single PDF, or uninstall the app to remove all of them. They are only ever stored on your device.</li>
+      <li><strong>Cloud data:</strong> Use the "Delete Account &amp; Data" option in Flippy's settings. This deletes the reading data we hold for you in Firestore. The sign-in record itself may remain with our authentication provider &mdash; email us at the address below and we will remove it for you.</li>
     </ul>
 
     <h2>Changes to This Policy</h2>
