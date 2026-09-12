@@ -60,7 +60,7 @@
 <body>
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="subtitle">Flippy - Page Flip PDF Reader &middot; Effective September 5, 2026</p>
+    <p class="subtitle">Flippy: AI PDF &amp; EPUB Reader &middot; Effective September 12, 2026</p>
 
     <h2>Overview</h2>
     <p>Flippy is a PDF reader available on Android and iOS. Your privacy matters to us. This policy explains what data Flippy accesses, how it is used, and your choices.</p>
@@ -78,11 +78,11 @@
     </ul>
     <p>This data is stored in your device's local storage and is not accessible to us or any third party.</p>
 
-    <h2>Cloud Sync (Premium Feature)</h2>
-    <p>If you choose to enable Cloud Sync, the following applies:</p>
+    <h2>Cloud Sync (optional, free)</h2>
+    <p>Cloud Sync is optional and free for all users &mdash; no subscription is required to sign in or sync. If you choose to enable it, the following applies:</p>
     <ul>
       <li><strong>Authentication:</strong> You sign in with your Google account via Google Sign-In. We receive your name, email address, and profile photo to display in the app. We do not store your Google password.</li>
-      <li><strong>Data synced:</strong> Bookmarks, highlights, reading progress, tags, and reading statistics are stored in Google Firebase Firestore, associated with your Google account.</li>
+      <li><strong>Data synced:</strong> Bookmarks, highlights, notes, reading position, collections, tags, and reading statistics are stored in Google Firebase Firestore, associated with your Google account.</li>
       <li><strong>PDF files are never uploaded.</strong> Only your reading data (bookmarks, progress, etc.) is synced.</li>
       <li><strong>You can delete your cloud data</strong> at any time from the app's settings.</li>
     </ul>
@@ -128,7 +128,8 @@
     <p><strong>There are no ads inside Flippy.</strong> We do not display ads, sell your data, or include any third-party advertising or analytics SDKs (no Meta/Facebook SDK, no Google Analytics, no crash reporting SDKs).</p>
     <p>Flippy uses a small backend service we operate (a Cloudflare Worker) to route AI Q&amp;A and Read-Aloud requests to their respective providers (Anthropic and OpenAI). This proxy lets us keep our API keys server-side so they aren't extractable from the app. The backend receives:</p>
     <ul>
-      <li>An <strong>anonymous install token</strong> &mdash; a random ID created the first time the app contacts our backend. It is stored on your device, and our backend keeps a record of it alongside the date it was created, your platform, the app version, and the IP address it was created from. It is used to apply rate limits per install so a single device can't run up unexpected charges, and to count unique installs in the anonymous event counters described below. It is not linked to your name, email, or any account, and reinstalling the app creates a brand-new token.</li>
+      <li>An <strong>anonymous install token</strong> &mdash; a random ID created the first time the app contacts our backend. It is stored on your device, and our backend keeps a record of it alongside the date it was created, your platform, the app version, and the IP address it was created from. It is used to apply rate limits per install so a single device can't run up unexpected charges, and to count unique installs in the anonymous event counters described below. It is not linked to your name, email, or any account.</li>
+      <li>A <strong>hashed device identifier</strong> &mdash; a one-way SHA-256 hash of an app-scoped identifier (on Android, the app-scoped Android ID; on iOS, a random ID the app keeps in the device Keychain). The raw identifier never leaves your device. The backend stores only the hash, next to the install token it was first seen with, and uses it solely to recognise a device that has already had its free allowance so that uninstalling and reinstalling the app does not reset it. It is not linked to your name, email, account, or advertising identifier, and it is never shared with anyone.</li>
       <li>The <strong>text of your AI question (or highlighted term) and the PDF content you're asking about</strong> (only for AI Q&amp;A, summary, Explain, and study-tool requests; only for as long as it takes to forward the request).</li>
       <li>The <strong>page text you've asked Flippy to read aloud</strong> (only for Read-Aloud requests).</li>
       <li>On Android only: your <strong>voice recording</strong> when you ask a question with Speak-to-PDF and it could not be transcribed on your device (only to forward it for transcription; see the Speak-to-PDF section above). On iPhone and iPad, voice recordings are never sent to the backend.</li>
