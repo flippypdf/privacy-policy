@@ -94,7 +94,9 @@
     <ul>
       <li><strong>Your files stay in your browser.</strong> PDFs you open on the website are stored in that browser's own storage on that computer. They are never uploaded to us or anyone else. Clearing the site's data in your browser removes them.</li>
       <li><strong>Sign-in and sync</strong> work as in the apps (see Cloud Sync above): the same Google Sign-In and Firebase Authentication, and your bookmarks, notes, highlights, reading positions and collections sync the same way. <strong>Delete Account &amp; Data</strong> works on the website too.</li>
-      <li><strong>No read-aloud, AI, or purchases on the website yet.</strong> The website does not contact our backend and sends no analytics or event counts.</li>
+      <li><strong>Read-aloud, AI, and purchases on the website</strong> work when you are signed in. The website then sends your requests (page text to read aloud, your AI questions with the relevant page text, a word to define) to our backend together with your Firebase sign-in token, which tells our backend your Google account's user ID. Our backend routes them to OpenAI or Anthropic exactly as it does for the apps (see below). The website sends no analytics or event counts.</li>
+      <li><strong>Read-aloud without a plan</strong> uses your browser's own built-in voice. Depending on your browser and the voice it picks, the browser maker may process that text online under its own terms (for example, some voices in Chrome are provided by Google).</li>
+      <li>To show the prices for your country, our backend uses the country of your IP address as reported by Cloudflare. The country is not stored with your account.</li>
       <li>The website is hosted on Cloudflare, which sees your IP address as any website host does. So that sign-in works in browsers that block third-party storage, flippypdf.com passes Google sign-in pages through to Firebase (<code>flippy-pdf.firebaseapp.com</code>). Like the apps, it loads open-source libraries from cdnjs.</li>
     </ul>
 
@@ -153,6 +155,15 @@
       <li>If a top-up purchase is refunded or reversed by the store, we may remove the corresponding credit.</li>
     </ul>
 
+    <h2>Purchases on the Website (Stripe)</h2>
+    <p>Plans and packs bought on flippypdf.com are sold and processed by <strong>Stripe</strong> as merchant of record, through Stripe's Managed Payments service (receipts may say &ldquo;Sold through Link&rdquo;). Stripe collects your payment details, name, email address, and billing address to process the payment, calculate tax, prevent fraud, and send receipts, under the <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe Privacy Policy</a> and the <a href="https://link.com/privacy" target="_blank" rel="noopener">Link Privacy Policy</a>. <strong>We never see your full card details.</strong></p>
+    <ul>
+      <li>When you start a purchase, our backend creates a Stripe customer record for you with your Google account's email address and user ID, so the purchase can be matched to your account.</li>
+      <li>From Stripe we receive and keep, filed under your Google account's user ID: your Stripe customer and subscription IDs, the plan, its status, whether it is set to cancel, and the date it is paid until. We use them to turn your website plan on and off and to open Stripe's page when you choose Manage subscription.</li>
+      <li>Your website plan's monthly read-aloud minutes and AI uses are counted under your user ID (kept for about 40 days), and website packs are kept in a purchase ledger under your user ID, in the same way as described for the apps above.</li>
+      <li>These records contain no card details. They are kept while you have a website plan or pack balance, and until you ask us to delete them (see Data Deletion). Stripe keeps its own payment records as the law requires.</li>
+    </ul>
+
     <h2>Our Backend, Analytics, and Advertising</h2>
     <p><strong>There are no ads inside Flippy.</strong> We do not display ads, sell your data, or include any third-party advertising or analytics SDKs (no Meta/Facebook SDK, no Google Analytics, no crash reporting SDKs).</p>
     <p>Flippy uses a small backend service we operate (a Cloudflare Worker) to route read-aloud, AI, transcription, dictionary, and purchase-verification requests to their providers. This proxy lets us keep our API keys server-side so they aren't extractable from the app, and lets us apply usage limits. The backend receives:</p>
@@ -182,6 +193,7 @@
       <li><strong>dictionaryapi.dev</strong> &mdash; for in-app word definitions (routed via our backend; cached by word alone, never linked to your install)</li>
       <li><strong>Wikipedia / Wikimedia Commons</strong> &mdash; for the images and captions shown in AI Explain (contacted directly from the app; only the highlighted term or a related search phrase is sent; no account or API key involved)</li>
       <li><strong>Apple App Store and Google Play</strong> &mdash; our backend contacts Apple's and Google's servers to verify subscription receipts and top-up purchases</li>
+      <li><strong>Stripe</strong> &mdash; sells and processes purchases made on the website, as merchant of record, and sends their receipts</li>
       <li><strong>Cloudflare Workers and Cloudflare's cache</strong> &mdash; our own backend proxy that holds our API credentials, applies usage limits, and caches generated read-aloud audio for up to 30 days</li>
       <li><strong>cdnjs (a public Cloudflare CDN)</strong> &mdash; Flippy loads the open-source library it uses to draw PDF pages from this public CDN. This happens <strong>every time the app starts</strong>, not only when you use a particular feature. Only the ordinary information carried by any web request is involved, such as your IP address; none of your documents, questions, or reading data is sent.</li>
     </ul>
@@ -197,6 +209,7 @@
       <li><strong>AI conversations:</strong> Use "Clear chat" in the AI panel to erase the conversation for a single book, or uninstall the app to remove all of them. They are only ever stored on your device.</li>
       <li><strong>Cloud data:</strong> Use "Delete Account &amp; Data" under Settings &rarr; Cloud Sync. This deletes the reading data we hold for you in Firestore and signs you out. The sign-in record itself (your Google account's name, email, and photo as held by Firebase Authentication) may remain with our authentication provider &mdash; email us at the address below and we will remove it for you.</li>
       <li><strong>Backend records:</strong> the install-token record, the hashed device identifier, usage counters, the subscription device record, and the top-up ledger are not linked to your name or email, so we cannot find them from your email address alone. Email us from the app (Settings &rarr; Help &amp; FAQ &rarr; Contact support) and we will work with you to identify and delete them. Note that deleting the top-up ledger forfeits any unused top-up balance.</li>
+      <li><strong>Website purchase records:</strong> the records we keep under your Google account's user ID (see Purchases on the Website) can be deleted by emailing <a href="mailto:flippypdf@gmail.com">flippypdf@gmail.com</a> from that Google account. Deleting them ends website plan access and forfeits unused website packs, but <strong>does not cancel billing</strong>: cancel first under Settings &rarr; Premium &rarr; Manage subscription on the website. Deleting your Flippy account does not cancel a Stripe subscription either.</li>
     </ul>
 
     <h2>Changes to This Policy</h2>
