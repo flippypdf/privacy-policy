@@ -60,7 +60,7 @@
 <body>
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="subtitle">Flippy: AI PDF &amp; EPUB Reader &middot; Effective November 1, 2026</p>
+    <p class="subtitle">Flippy: AI PDF &amp; EPUB Reader &middot; Effective November 3, 2026</p>
 
     <h2>Overview</h2>
     <p>Flippy is a PDF and EPUB reader for Android, iPhone and iPad, and Mac, and a website at flippypdf.com, with optional read-aloud, AI, and cloud sync features. Your privacy matters to us. This policy explains what data Flippy accesses, how it is used, and your choices. In short: your books stay on your device, there are no ads, we do not sell your data, and the only things that ever leave your device are the specific pieces of text (or reading data) needed to run a feature you chose to use.</p>
@@ -141,8 +141,8 @@
     <ul>
       <li>The microphone is only active <strong>while you are recording a question</strong> (after you press the microphone button). Flippy never listens in the background.</li>
       <li><strong>On iPhone, iPad, and Mac, your speech is transcribed entirely on your device</strong>, using Apple's built-in speech recognition. <strong>Your voice recording never leaves your device</strong> &mdash; only the resulting text is used, and the recording is deleted straight afterwards. If your device cannot transcribe (for example, Dictation has never been enabled), Flippy tells you what to enable; nothing is uploaded.</li>
-      <li><strong>On Android, Flippy transcribes your speech on your device first</strong>, using Android's built-in speech recognition &mdash; on most modern devices this is what happens, and the recording never leaves your device. Only if on-device recognition produces no result is the <strong>voice recording</strong> sent via our backend to <strong>OpenAI's transcription API (Whisper)</strong>. In that case the recording is used only to produce the transcript and is not stored by Flippy or our backend beyond the lifetime of that request.</li>
-      <li>The transcribed question is then handled exactly like a typed question (see the sections above), and the spoken answer is generated with OpenAI's Text-to-Speech.</li>
+      <li><strong>On Android, your speech is transcribed on your device</strong>, using Android's built-in speech recognition, and <strong>the recording never leaves your device</strong>. If your device cannot recognise speech on its own, Flippy tells you instead; nothing is uploaded. (Versions of Flippy before 5.1 could send the voice recording via our backend to <strong>OpenAI's transcription API (Whisper)</strong> when on-device recognition produced no result. That recording was used only to produce the transcript and was not stored by Flippy or our backend beyond the lifetime of that request.)</li>
+      <li>The transcribed question is then handled exactly like a typed question (see the sections above), and the spoken answer is made by the same voice services as Read Aloud (see Third-Party Services below).</li>
       <li>OpenAI's handling of this audio is governed by <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API Data Usage Policies</a>. Per their policy, data sent via the API is not used to train their models.</li>
     </ul>
 
@@ -181,7 +181,7 @@
       <li>The <strong>text of your AI question (or highlighted term) and the book content you're asking about</strong> (only for AI Q&amp;A, summary, Explain, Define, and study-tool requests; only for as long as it takes to forward the request).</li>
       <li>The <strong>page text you've asked Flippy to read aloud</strong> (only for read-aloud requests; the generated audio may be cached as described above).</li>
       <li>The <strong>text of a question you ask in the Help &amp; FAQ box</strong> (only for as long as it takes to forward it).</li>
-      <li>On Android only: your <strong>voice recording</strong> when you ask a question by voice and it could not be transcribed on your device (only to forward it for transcription; see the voice section above). On iPhone, iPad, and Mac, voice recordings are never sent to the backend.</li>
+      <li>Voice recordings are never sent to the backend by Flippy 5.1 and later, on any device. (On Android, versions before 5.1 could send a voice recording that could not be transcribed on the device, only to forward it for transcription; see the voice section above.)</li>
       <li>Your <strong>App Store or Google Play purchase receipt or transaction</strong> when the app verifies a subscription or credits a top-up pack (see In-App Purchases).</li>
       <li><strong>Remote settings and test groups:</strong> a few seconds after the app starts, it asks our backend for its current settings (for example, the length of the free week or how often tips may appear), sending its install token. When we are comparing two versions of a screen, the backend puts each install in group A or B, chosen from the install token, and keeps a record of which group it gave that install (the test's name and the letter, filed under the install token) for 90 days, so the anonymous event counters can be split by group. Nothing else is stored, and no record is made while no test is running.</li>
       <li><strong>App screen updates (Android, iPhone and iPad):</strong> the app checks our backend for an updated version of its screens and downloads the files if there is one. The check sends only the platform and the app's build number &mdash; no install token, device identifier or reading data. Each update is signed by us and checked on your device before it is used.</li>
@@ -203,7 +203,7 @@
       <li><strong>Google Firebase / Firestore</strong> &mdash; for storing your synced reading data</li>
       <li><strong>DeepInfra</strong> &mdash; runs the Kokoro voice model for AI Read-Aloud and for speaking AI answers out loud (routed via our backend; see AI Read-Aloud)</li>
       <li><strong>Together AI</strong> &mdash; runs the same Kokoro voice model as a second host when DeepInfra is slow or unavailable (routed via our backend; see AI Read-Aloud)</li>
-      <li><strong>OpenAI Text-to-Speech and Whisper transcription APIs</strong> &mdash; for AI Read-Aloud and spoken AI answers in languages Kokoro does not speak yet and as a last backup when neither Kokoro host can generate a page, and (Android only) for transcribing voice questions that your device could not transcribe locally (routed via our backend; see the backend section above)</li>
+      <li><strong>OpenAI Text-to-Speech and Whisper transcription APIs</strong> &mdash; for AI Read-Aloud and spoken AI answers in languages Kokoro does not speak yet and as a last backup when neither Kokoro host can generate a page, and, in Android versions before 5.1 only, for transcribing voice questions that the device could not transcribe locally (routed via our backend; see the backend section above)</li>
       <li><strong>Anthropic Claude API</strong> &mdash; for AI Q&amp;A, summaries, AI Explain, study tools, some definitions, and the Help &amp; FAQ question box (routed via our backend)</li>
       <li><strong>dictionaryapi.dev</strong> &mdash; for in-app word definitions (routed via our backend; cached by word alone, never linked to your install)</li>
       <li><strong>Wikipedia / Wikimedia Commons</strong> &mdash; for the images and captions shown in AI Explain (contacted directly from the app; only the highlighted term or a related search phrase is sent; no account or API key involved)</li>
